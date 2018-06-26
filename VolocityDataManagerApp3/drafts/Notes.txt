@@ -1,0 +1,7 @@
+Version 2
+
+Additions:
+-Changed "minimum frames per track" interface.
+-Choose multiple track parameters to put into output table
+-replaced initial zero values with NA values for object measurements (these initial zero values do not convey any actual data, such as the velocity of object at time point zero.)
+

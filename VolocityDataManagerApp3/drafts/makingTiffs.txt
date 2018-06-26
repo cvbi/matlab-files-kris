@@ -1,0 +1,114 @@
+
+# terminal command convert oif file to ome.tiff
+# see if tifffile can handle 3gb file
+/Users/cbarilla/Documents/MATLAB/bftools/bfconvert '/Users/cbarilla/Desktop/DataSimulator/Data/062916 D7 Class I L 35.oif' /Users/cbarilla/Desktop/test.ome.tiff
+
+os.chdir('/Users/cbarilla/Desktop/DataSimulator/Data/')
+print os.getcwd();
+
+import time
+start = time.clock()
+
+tif = TiffFile('test.ome.tiff')
+
+print time.clock() - start
+
+"""
+took 109 seconds which is not bad
+
+"""
+
+# dtype=uint16
+
+    images = tif.asarray()
+for page in tif:
+	print page
+        
+for tag in page.tags.values():
+            t = tag.name, tag.value
+        image = page.asarray()
+
+
+
+
+
+
+
+
+
+# imports
+from scipy.misc import *
+import numpy, scipy, matplotlib, tifffile
+import os
+from tifffile import TiffFile
+
+
+
+
+### trying to match ome.tiff
+os.chdir('/Users/cbarilla/Desktop/')
+print os.getcwd();
+
+data = numpy.random.randint(0, 100, (256,256))
+#data = numpy.random.randint(0, 100, (2,256,256))
+x = numpy.asarray(data, dtype=numpy.uint16)
+
+#imsave('temp.tif', x, 'imagej', 'continuous' )
+#tifffile.imsave('temp.tif', x, ('imagej','contiguous'), metadata={'axes': 'TZCYX'} )
+
+
+tifffile.imsave('temp.tif', x, imagej=True, contiguous=True, photometric='palette')
+
+tif = TiffFile('temp.tif')
+
+for page in tif:
+	print page
+
+
+
+
+
+
+with TiffFile('temp.tif') as tif:
+    images = tif.asarray()
+    for page in tif:
+	print page
+        for tag in page.tags.values():
+            t = tag.name, tag.value
+        image = page.asarray()
+
+
+
+
+
+x = numpy.array([[1, 2, 3], [4, 5, 6]], np.int64)
+x = numpy.array([[1, 2, 3], [4, 5, 6]] )
+
+#imsave('temp.tif', x)
+
+
+
+
+
+
+data = numpy.random.randint(low[, high, size, dtype])
+data = numpy.random.randint(0, 100, (256,256), numpy.int64)
+
+data = numpy.random.rand(5, 301, 219)
+
+xx = numpy.array(data)
+
+#imsave('temp.tif', data)
+
+image = imread('temp.tif')
+numpy.testing.assert_array_equal(image, data)
+
+
+
+with TiffFile('temp.tif') as tif:
+    images = tif.asarray()
+    for page in tif:
+	print page
+        for tag in page.tags.values():
+            t = tag.name, tag.value
+        image = page.asarray()
